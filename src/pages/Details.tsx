@@ -27,8 +27,8 @@ export type Cat = {
 };
 
 const Details = () => {
-  const [cat, setCat] = useState<Cat | null>({});
-  const [catImg, setCatImg] = useState(null);
+  const [cat, setCat] = useState<Cat | undefined>(undefined);
+  const [catImg, setCatImg] = useState('');
   const { currentCat } = useSelector((state: RootState) => state.cat);
 
   let query = currentCat.slice(0, 3);
