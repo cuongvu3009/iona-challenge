@@ -6,8 +6,8 @@ class TutorialDataService {
     return API.get<Array<ICatsData>>("/");
   }
 
-  get(id: string) {
-    return API.get<ICatsData>(`/${id}`);
+  get(name: string) {
+    return API.get<ICatsData>(`/search?q=${name}`);
   }
 
 }
