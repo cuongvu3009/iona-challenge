@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Obj } from 'reselect/es/types';
 import CatDataService from '../services/CatDataService';
-import ICatsData, { RootState } from '../types/ICatsData';
+import { RootState } from '../types/ICatsData';
 import styled from 'styled-components';
 import Stars from '../components/Stars';
 
@@ -106,7 +105,8 @@ const Details = () => {
           </InfoContainer>
         ) : (
           <p style={{ textAlign: 'center' }}>
-            This endpoint is broken, please try another one
+            This information session can not be loaded due to technical problem,
+            please try another one!
           </p>
         )}
       </h4>
