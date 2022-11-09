@@ -8,7 +8,7 @@ const Navbar = () => {
     <Wrapper>
       <LinkContainer>
         <Link to='/'>
-          <button>Home</button>
+          <button style={{ marginRight: '10px' }}>Home</button>
         </Link>
         <Link to='/about'>
           <button>About</button>
