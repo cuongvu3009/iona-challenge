@@ -1,4 +1,6 @@
-export default interface ICatsData {
+export default interface ICatsData  {
+	cats: any;
+	currentCat: any;
 	name: string,
   id?: any | null,
 	affection_level: number,

@@ -3,14 +3,14 @@ import type { RootState } from '../store'
 
 // Define a type for the slice state
 interface catState {
-  currentCat: object,
+  currentCat: string,
 	loading: boolean,
 	error: boolean
 }
 
 // Define the initial state using that type
 const initialState: catState = {
-	currentCat: {},
+	currentCat: '',
 	loading: false,
 	error: false
 }

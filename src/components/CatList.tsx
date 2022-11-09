@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { getCat } from '../redux/features/catSlice';
 import CatDataService from '../services/CatDataService';
 import ICatsData from '../types/ICatsData';
@@ -8,6 +9,7 @@ const CatList = () => {
   const [cats, setCats] = useState([]);
   const [choosen, setChoosen] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCats = () => {
@@ -29,6 +31,7 @@ const CatList = () => {
   useEffect(() => {
     try {
       dispatch(getCat(choosen));
+      console.log(choosen);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +41,7 @@ const CatList = () => {
     <div>
       {cats &&
         cats.map((cat: ICatsData) => (
-          <button key={cat.id} onClick={() => setChoosen(cat.name)}>
+          <button key={cat.id} onClick={() => setChoosen(cat.id)}>
             {cat.name}
           </button>
         ))}
