@@ -4,6 +4,9 @@
 
 Hello, This is a [React.js] project bootstrapped with npx create-react-app my-app --template typescript
 
+## Tech stacks
+React, Redux, Typescript, styled-components, react-router-dom, react-icons
+
 ## Getting Started
 
 First, run the development server:
