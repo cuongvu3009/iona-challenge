@@ -131,7 +131,7 @@ const PictureContainer = styled.div`
   gap: 4px;
 
   img {
-    width: 250px;
+    width: 280px;
     height: 250px;
     object-fit: cover;
     margin: 0 2px;
