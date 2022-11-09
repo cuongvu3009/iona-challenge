@@ -1,3 +1,5 @@
+import { store } from "../redux/store";
+
 export default interface ICatsData  {
 	cats: any;
 	currentCat: any;
@@ -19,5 +21,7 @@ export default interface ICatsData  {
 	hypoallergenic: number,
 	image: object,
 	lap: number,
-	wikipedia_url: string
+	wikipedia_url: string,
 }
+
+export type RootState = ReturnType<typeof store.getState>

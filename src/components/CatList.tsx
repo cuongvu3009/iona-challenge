@@ -7,7 +7,6 @@ import ICatsData from '../types/ICatsData';
 
 const CatList = () => {
   const [cats, setCats] = useState([]);
-  const [choosen, setChoosen] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,20 +27,13 @@ const CatList = () => {
     getCats();
   }, []);
 
-  useEffect(() => {
-    try {
-      dispatch(getCat(choosen));
-      console.log(choosen);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [choosen]);
+  console.log(cats);
 
   return (
     <div>
       {cats &&
         cats.map((cat: ICatsData) => (
-          <button key={cat.id} onClick={() => setChoosen(cat.id)}>
+          <button key={cat.id} onClick={() => dispatch(getCat(cat.id))}>
             {cat.name}
           </button>
         ))}
