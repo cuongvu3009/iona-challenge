@@ -11,7 +11,7 @@ class TutorialDataService {
   }
 
 	getImg(id: string) {
-		return API.get<ICatsData>(`/images/search?breed_ids=${id}`)
+		return API.get<ICatsData>(`/images/search?breed_ids=${id}&limit=20`)
 	}
 }
 

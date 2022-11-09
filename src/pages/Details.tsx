@@ -28,41 +28,58 @@ export type Cat = {
 
 const Details = () => {
   const [cat, setCat] = useState<Cat | undefined>(undefined);
-  const [catImg, setCatImg] = useState('');
+  const [catImg, setCatImg] = useState([]);
+  const [isRender, setIsRender] = useState(0);
   const { currentCat } = useSelector((state: RootState) => state.cat);
 
   let query = currentCat.slice(0, 3);
 
-  useEffect(() => {
-    const getCat = () => {
-      try {
-        CatDataService.get(query)
-          .then((response: any) => {
-            setCat(response.data[0]);
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
+  const getCat = () => {
+    try {
+      CatDataService.get(query)
+        .then((response: any) => {
+          setCat(response.data[0]);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-        CatDataService.getImg(currentCat)
-          .then((response: any) => {
-            setCatImg(response.data[0].url);
-          })
-          .catch((e: Error) => {
-            console.log(e);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const getCatImg = () => {
+    try {
+      CatDataService.getImg(currentCat)
+        .then((response: any) => {
+          setCatImg(response.data);
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
     getCat();
   }, []);
 
-  console.log(cat);
+  useEffect(() => {
+    getCatImg();
+  }, []);
+
+  console.log(catImg);
 
   return (
     <Wrapper>
-      <img src={catImg} alt='' />
+      <PictureContainer>
+        {catImg.map((img: any) => {
+          return <img key={img.id} src={img.url} alt='' />;
+        })}
+      </PictureContainer>
+
       <h4>
         {cat ? (
           <InfoContainer>
@@ -88,7 +105,9 @@ const Details = () => {
             </Rating>
           </InfoContainer>
         ) : (
-          ' This endpoint is broken, please try another one'
+          <p style={{ textAlign: 'center' }}>
+            This endpoint is broken, please try another one
+          </p>
         )}
       </h4>
     </Wrapper>
@@ -100,18 +119,29 @@ export default Details;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 410px;
-  margin: 0 auto;
+`;
+
+const PictureContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 4px;
 
   img {
-    margin: 10px 0;
-    width: 100%;
-    height: auto;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
+    margin: 0 2px;
   }
 `;
 
-const InfoContainer = styled.div``;
+const InfoContainer = styled.div`
+  width: 410px;
+  margin: 0 auto;
+`;
 
 const Rating = styled.div`
   width: max-content;
