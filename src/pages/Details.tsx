@@ -70,8 +70,6 @@ const Details = () => {
     getCatImg();
   }, []);
 
-  console.log(catImg);
-
   return (
     <Wrapper>
       <PictureContainer>

@@ -5,9 +5,11 @@ import { getCat } from '../redux/features/catSlice';
 import CatDataService from '../services/CatDataService';
 import ICatsData from '../types/ICatsData';
 import styled from 'styled-components';
+import { BsSearch } from 'react-icons/bs';
 
 const CatList = () => {
   const [cats, setCats] = useState([]);
+  const [typing, setTyping] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,8 +30,19 @@ const CatList = () => {
     getCats();
   }, []);
 
+  console.log(typing);
+  console.log(cats);
   return (
     <Wrapper>
+      <SearchBox>
+        <BsSearch />{' '}
+        <input
+          type='text'
+          placeholder='Lower case only...'
+          onChange={(e) => setTyping(e.target.value)}
+        />
+      </SearchBox>
+
       <h4>
         Some API endpoints does not work due to API provider, for example
         American Bobtail, American Curl, Shorthair, Australian Mist ...,
@@ -38,17 +51,19 @@ const CatList = () => {
       </h4>
 
       {cats &&
-        cats.map((cat: ICatsData) => (
-          <button
-            key={cat.id}
-            onClick={() => {
-              dispatch(getCat(cat.id));
-              navigate(`/${cat.id}`);
-            }}
-          >
-            {cat.name}
-          </button>
-        ))}
+        cats
+          .filter((e: any) => e.name.toLowerCase().includes(typing))
+          .map((cat: ICatsData) => (
+            <button
+              key={cat.id}
+              onClick={() => {
+                dispatch(getCat(cat.id));
+                navigate(`/${cat.id}`);
+              }}
+            >
+              {cat.name}
+            </button>
+          ))}
     </Wrapper>
   );
 };
@@ -57,4 +72,17 @@ export default CatList;
 
 const Wrapper = styled.div`
   text-align: center;
+`;
+
+const SearchBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin: 10px;
+
+  input {
+    padding: 5px;
+    width: 300px;
+  }
 `;
