@@ -4,6 +4,7 @@ import CatDataService from '../services/CatDataService';
 import { RootState } from '../types/ICatsData';
 import styled from 'styled-components';
 import Stars from '../components/Stars';
+import { Link } from 'react-router-dom';
 
 export type Cat = {
   child_friendly: number;
@@ -80,6 +81,12 @@ const Details = () => {
       </PictureContainer>
 
       <h4>
+        <div style={{ textAlign: 'center' }}>
+          <Link to='/'>
+            <button>Back</button>
+          </Link>
+        </div>
+
         {cat ? (
           <InfoContainer>
             <h4>Cat name : {cat.name}</h4>

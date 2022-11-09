@@ -1,8 +1,8 @@
-import React from 'react';
+import styled from 'styled-components';
 
 const About = () => {
   return (
-    <div>
+    <Wrapper>
       <h3>About</h3>
       <h4>
         Welcome to cat paradise, where you can learn more about any cat breed
@@ -19,13 +19,17 @@ const About = () => {
       <p>Gmail: cuongvu3009@gmail.com</p>
       <p>Phone: +358465339075</p>
       <p>
-        Linkedin:
+        Linkedin:{' '}
         <a href='https://www.linkedin.com/in/cuong-vu-duc/'>
           https://www.linkedin.com/in/cuong-vu-duc/
-        </a>{' '}
+        </a>
       </p>
-    </div>
+    </Wrapper>
   );
 };
 
 export default About;
+
+const Wrapper = styled.div`
+  margin: 7px;
+`;
