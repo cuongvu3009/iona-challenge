@@ -1,4 +1,5 @@
 export default interface ICatsData {
+	name: string,
   id?: any | null,
 	affection_level: number,
 	adaptability: number,
