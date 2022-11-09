@@ -89,7 +89,7 @@ const Details = () => {
 
         {cat ? (
           <InfoContainer>
-            <h4>Cat name : {cat.name}</h4>
+            <h4>Cat breed : {cat.name}</h4>
             <h5>Life Span: {cat.life_span} years</h5>
             <h5>Origin: {cat.origin}</h5>
             <p>Description: {cat.description}</p>
