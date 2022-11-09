@@ -4,9 +4,26 @@ import { Obj } from 'reselect/es/types';
 import CatDataService from '../services/CatDataService';
 import ICatsData, { RootState } from '../types/ICatsData';
 import styled from 'styled-components';
+import Stars from '../components/Stars';
 
 export type Cat = {
+  child_friendly: number;
+  affection_level: number;
+  adaptability: number;
   name: string;
+  dog_friendly: number;
+  energy_level: number;
+  grooming: number;
+  hairless: number;
+  health_issues: number;
+  hypoallergenic: number;
+  indoor: number;
+  intelligence: number;
+  shedding_level: number;
+  life_span: string;
+  origin: string;
+  social_needs: number;
+  description: string;
 };
 
 const Details = () => {
@@ -45,14 +62,34 @@ const Details = () => {
 
   return (
     <Wrapper>
-      <img
-        src={catImg}
-        alt=''
-        style={{ width: '500px', height: '500px', objecFit: 'cover' }}
-      />
+      <img src={catImg} alt='' />
       <h4>
-        Cat name:
-        {cat ? cat.name : ' This endpoint is broken, please try another one'}
+        {cat ? (
+          <InfoContainer>
+            <h4>Cat name : {cat.name}</h4>
+            <h5>Life Span: {cat.life_span} years</h5>
+            <h5>Origin: {cat.origin}</h5>
+            <p>Description: {cat.description}</p>
+            <hr />
+            <Rating>
+              <h5>Adaptability: {Stars(cat.adaptability)}</h5>
+              <h5>Affection: {Stars(cat.affection_level)}</h5>
+              <h5>Child Friendly: {Stars(cat.child_friendly)}</h5>
+              <h5>Dog Friendly: {Stars(cat.dog_friendly)}</h5>
+              <h5>Energy Level: {Stars(cat.energy_level)}</h5>
+              <h5>Grooming: {Stars(cat.grooming)}</h5>
+              <h5>Hairless: {Stars(cat.hairless)}</h5>
+              <h5>Health Issues: {Stars(cat.health_issues)}</h5>
+              <h5>Hypoallergenic: {Stars(cat.hypoallergenic)}</h5>
+              <h5>Indoor: {Stars(cat.indoor)}</h5>
+              <h5>Intelligence: {Stars(cat.intelligence)}</h5>
+              <h5>Sehdding Level: {Stars(cat.shedding_level)}</h5>
+              <h5>Social Needs: {Stars(cat.social_needs)}</h5>
+            </Rating>
+          </InfoContainer>
+        ) : (
+          ' This endpoint is broken, please try another one'
+        )}
       </h4>
     </Wrapper>
   );
@@ -63,10 +100,20 @@ export default Details;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 410px;
   margin: 0 auto;
 
   img {
     margin: 10px 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
   }
+`;
+
+const InfoContainer = styled.div``;
+
+const Rating = styled.div`
+  width: max-content;
+  margin: 0 auto;
 `;
