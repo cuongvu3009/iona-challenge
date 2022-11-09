@@ -27,13 +27,17 @@ const CatList = () => {
     getCats();
   }, []);
 
-  console.log(cats);
-
   return (
     <div>
       {cats &&
         cats.map((cat: ICatsData) => (
-          <button key={cat.id} onClick={() => dispatch(getCat(cat.id))}>
+          <button
+            key={cat.id}
+            onClick={() => {
+              dispatch(getCat(cat.id));
+              navigate(`/${cat.id}`);
+            }}
+          >
             {cat.name}
           </button>
         ))}

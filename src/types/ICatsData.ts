@@ -1,9 +1,8 @@
 import { store } from "../redux/store";
 
 export default interface ICatsData  {
-	cats: any;
-	currentCat: any;
 	name: string,
+	currentCat: any;
   id?: any | null,
 	affection_level: number,
 	adaptability: number,
@@ -25,3 +24,17 @@ export default interface ICatsData  {
 }
 
 export type RootState = ReturnType<typeof store.getState>
+
+export type Props = {
+	setState: React.Dispatch<React.SetStateAction<number>>;
+	obj: {
+    id: string;
+    title: string;
+  };
+  // function that returns nothing
+  onClick: () => void,
+  // function accepts a parameter and has return type
+  onChange: (target: string) => boolean,
+  // function that takes an event
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+}

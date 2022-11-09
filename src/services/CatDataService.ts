@@ -3,12 +3,16 @@ import ICatsData from "../types/ICatsData";
 
 class TutorialDataService {
   getAll() {
-    return API.get<Array<ICatsData>>("/");
+    return API.get<Array<ICatsData>>("/breeds");
   }
 
   get(id: string) {
-    return API.get<ICatsData>(`/search?q=${id}`);
+    return API.get<ICatsData>(`/breeds/search?q=${id}`);
   }
+
+	getImg(id: string) {
+		return API.get<ICatsData>(`/images/search?breed_ids=${id}`)
+	}
 }
 
 export default new TutorialDataService();
