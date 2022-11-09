@@ -139,7 +139,8 @@ const PictureContainer = styled.div`
 `;
 
 const InfoContainer = styled.div`
-  width: 410px;
+  text-align: center;
+  width: 60%;
   margin: 0 auto;
 `;
 
