@@ -10,36 +10,51 @@ const Details = () => {
   const [cat, setCat] = useState<ICatsData | undefined>(undefined);
   const [catImg, setCatImg] = useState<string[] | null>([]);
   const { currentCat } = useSelector((state: RootState) => state.cat);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   let query = currentCat.slice(0, 3);
 
   useEffect(() => {
     const getCat = () => {
+      setIsLoading(true);
       try {
         //	get cat
         CatDataService.get(query)
           .then((response: any) => {
             setCat(response.data[0]);
+            setIsLoading(false);
           })
           .catch((e: Error) => {
             console.log(e);
+            setIsLoading(false);
           });
 
         // get cat img
         CatDataService.getImg(currentCat)
           .then((response: any) => {
             setCatImg(response.data);
+            setIsLoading(false);
           })
           .catch((e: Error) => {
             console.log(e);
+            setIsLoading(false);
           });
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     };
 
     getCat();
   }, []);
+
+  if (isLoading) {
+    return (
+      <LoadingWrapper>
+        <h2>Loading...</h2>
+      </LoadingWrapper>
+    );
+  }
 
   return (
     <Wrapper>
@@ -95,6 +110,11 @@ export default Details;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const LoadingWrapper = styled.div`
+  text-align: center;
+  margin: 20px;
 `;
 
 const PictureContainer = styled.div`
