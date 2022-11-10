@@ -10,6 +10,7 @@ import SimpleImageSlider from 'react-simple-image-slider';
 const Details = () => {
   const [cat, setCat] = useState<ICatsData | undefined>(undefined);
   const [catImg, setCatImg] = useState<string[] | null>([]);
+  const [images, setImages] = useState<string[]>([]);
   const { currentCat } = useSelector((state: RootState) => state.cat);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -34,6 +35,9 @@ const Details = () => {
         CatDataService.getImg(currentCat)
           .then((response: any) => {
             setCatImg(response.data);
+            if (catImg) {
+              setImages(catImg?.map((obj: any) => obj?.url));
+            }
             setIsLoading(false);
           })
           .catch((e: Error) => {
@@ -56,13 +60,16 @@ const Details = () => {
       </LoadingWrapper>
     );
   }
+
+  console.log(typeof images);
+
   return (
     <Wrapper>
       <PictureContainer>
         <SimpleImageSlider
           width={390}
           height={320}
-          images={catImg?.map((obj: any) => obj?.url)}
+          images={images}
           showBullets={true}
           showNavs={false}
         />
