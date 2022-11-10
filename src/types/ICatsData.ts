@@ -23,6 +23,7 @@ export default interface ICatsData  {
 	image?: object | undefined,
 	lap?: number,
 	wikipedia_url?: string,
+	images?: any[]
 }
 
 export type RootState = ReturnType<typeof store.getState>

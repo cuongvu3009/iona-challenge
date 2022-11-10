@@ -57,8 +57,6 @@ const Details = () => {
     );
   }
 
-  const images = catImg?.map((obj: any) => obj.url);
-
   console.log(catImg);
   return (
     <Wrapper>
@@ -66,7 +64,7 @@ const Details = () => {
         <SimpleImageSlider
           width={390}
           height={320}
-          images={images}
+          images={catImg?.map((obj: any) => obj.url)}
           showBullets={true}
           showNavs={false}
         />
