@@ -35,9 +35,7 @@ const Details = () => {
         CatDataService.getImg(currentCat)
           .then((response: any) => {
             setCatImg(response.data);
-            if (catImg) {
-              setImages(catImg?.map((obj: any) => obj?.url));
-            }
+
             setIsLoading(false);
           })
           .catch((e: Error) => {
@@ -53,6 +51,12 @@ const Details = () => {
     getCat();
   }, []);
 
+  useEffect(() => {
+    if (catImg) {
+      setImages(catImg?.map((obj: any) => obj?.url));
+    }
+  }, [catImg]);
+
   if (isLoading) {
     return (
       <LoadingWrapper>
@@ -60,8 +64,6 @@ const Details = () => {
       </LoadingWrapper>
     );
   }
-
-  console.log(typeof images);
 
   return (
     <Wrapper>
