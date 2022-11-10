@@ -56,16 +56,13 @@ const Details = () => {
       </LoadingWrapper>
     );
   }
-
-  let images: string[] | undefined = catImg?.map((obj: any) => obj.url);
-
   return (
     <Wrapper>
       <PictureContainer>
         <SimpleImageSlider
           width={390}
           height={320}
-          images={images}
+          images={catImg?.map((obj: any) => obj?.url)}
           showBullets={true}
           showNavs={false}
         />
