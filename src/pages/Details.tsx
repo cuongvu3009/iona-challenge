@@ -5,6 +5,7 @@ import ICatsData, { RootState } from '../types/ICatsData';
 import styled from 'styled-components';
 import Stars from '../components/Stars';
 import { Link } from 'react-router-dom';
+import SimpleImageSlider from 'react-simple-image-slider';
 
 const Details = () => {
   const [cat, setCat] = useState<ICatsData | undefined>(undefined);
@@ -56,12 +57,19 @@ const Details = () => {
     );
   }
 
+  const images = catImg?.map((obj: any) => obj.url);
+
+  console.log(catImg);
   return (
     <Wrapper>
       <PictureContainer>
-        {catImg?.map((img: any) => {
-          return <img key={img.id} src={img.url} alt='' />;
-        })}
+        <SimpleImageSlider
+          width={390}
+          height={320}
+          images={images}
+          showBullets={true}
+          showNavs={false}
+        />
       </PictureContainer>
 
       <h4>
@@ -93,6 +101,15 @@ const Details = () => {
               <h5>Sehdding Level: {Stars(cat.shedding_level)}</h5>
               <h5>Social Needs: {Stars(cat.social_needs)}</h5>
             </Rating>
+
+            <hr />
+
+            <h3>Galery</h3>
+            <PictureContainer>
+              {catImg?.map((img: any) => {
+                return <img key={img.id} src={img.url} alt='' />;
+              })}
+            </PictureContainer>
           </InfoContainer>
         ) : (
           <p style={{ textAlign: 'center' }}>
@@ -127,7 +144,7 @@ const PictureContainer = styled.div`
   gap: 4px;
 
   img {
-    width: 280px;
+    width: 310px;
     height: 250px;
     object-fit: cover;
     margin: 0 2px;
