@@ -57,14 +57,15 @@ const Details = () => {
     );
   }
 
-  console.log(catImg);
+  let images: string[] | undefined = catImg?.map((obj: any) => obj.url);
+
   return (
     <Wrapper>
       <PictureContainer>
         <SimpleImageSlider
           width={390}
           height={320}
-          images={catImg?.map((obj: any) => obj.url)}
+          images={images}
           showBullets={true}
           showNavs={false}
         />
