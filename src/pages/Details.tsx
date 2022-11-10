@@ -1,79 +1,50 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CatDataService from '../services/CatDataService';
-import { RootState } from '../types/ICatsData';
+import ICatsData, { RootState } from '../types/ICatsData';
 import styled from 'styled-components';
 import Stars from '../components/Stars';
 import { Link } from 'react-router-dom';
 
-export type Cat = {
-  child_friendly: number;
-  affection_level: number;
-  adaptability: number;
-  name: string;
-  dog_friendly: number;
-  energy_level: number;
-  grooming: number;
-  hairless: number;
-  health_issues: number;
-  hypoallergenic: number;
-  indoor: number;
-  intelligence: number;
-  shedding_level: number;
-  life_span: string;
-  origin: string;
-  social_needs: number;
-  description: string;
-};
-
 const Details = () => {
-  const [cat, setCat] = useState<Cat | undefined>(undefined);
-  const [catImg, setCatImg] = useState([]);
-  const [isRender, setIsRender] = useState(0);
+  const [cat, setCat] = useState<ICatsData | undefined>(undefined);
+  const [catImg, setCatImg] = useState<string[] | null>([]);
   const { currentCat } = useSelector((state: RootState) => state.cat);
 
   let query = currentCat.slice(0, 3);
 
-  const getCat = () => {
-    try {
-      CatDataService.get(query)
-        .then((response: any) => {
-          setCat(response.data[0]);
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getCatImg = () => {
-    try {
-      CatDataService.getImg(currentCat)
-        .then((response: any) => {
-          setCatImg(response.data);
-        })
-        .catch((e: Error) => {
-          console.log(e);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getCat = () => {
+      try {
+        //	get cat
+        CatDataService.get(query)
+          .then((response: any) => {
+            setCat(response.data[0]);
+          })
+          .catch((e: Error) => {
+            console.log(e);
+          });
+
+        // get cat img
+        CatDataService.getImg(currentCat)
+          .then((response: any) => {
+            setCatImg(response.data);
+          })
+          .catch((e: Error) => {
+            console.log(e);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getCat();
-  }, []);
-
-  useEffect(() => {
-    getCatImg();
   }, []);
 
   return (
     <Wrapper>
       <PictureContainer>
-        {catImg.map((img: any) => {
+        {catImg?.map((img: any) => {
           return <img key={img.id} src={img.url} alt='' />;
         })}
       </PictureContainer>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCat } from '../redux/features/catSlice';
@@ -8,8 +8,8 @@ import styled from 'styled-components';
 import { BsSearch } from 'react-icons/bs';
 
 const CatList = () => {
-  const [cats, setCats] = useState([]);
-  const [typing, setTyping] = useState('');
+  const [cats, setCats] = useState<ICatsData[]>([]);
+  const [typing, setTyping] = useState<string | number>('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,8 +30,6 @@ const CatList = () => {
     getCats();
   }, []);
 
-  console.log(typing);
-  console.log(cats);
   return (
     <Wrapper>
       <SearchBox>
