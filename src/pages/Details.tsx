@@ -6,8 +6,9 @@ import styled from 'styled-components';
 import Stars from '../components/Stars';
 import { Link } from 'react-router-dom';
 import SimpleImageSlider from 'react-simple-image-slider';
+import isMobile, { getWindowDimensions } from '../utilities/isMobile';
 
-const Details = () => {
+const Details: React.FC = () => {
   const [cat, setCat] = useState<ICatsData | undefined>(undefined);
   const [catImg, setCatImg] = useState<string[] | null>([]);
   const [images, setImages] = useState<string[]>([]);
@@ -69,11 +70,24 @@ const Details = () => {
     <Wrapper>
       <PictureContainer>
         <SimpleImageSlider
-          width={390}
-          height={320}
+          width={
+            !isMobile()
+              ? getWindowDimensions().width / 1.2
+              : getWindowDimensions().width
+          }
+          height={
+            !isMobile()
+              ? getWindowDimensions().width / 2
+              : getWindowDimensions().width / 1.4
+          }
           images={images}
           showBullets={true}
-          showNavs={false}
+          showNavs={isMobile() ? false : true}
+          autoPlay={true}
+          loop={true}
+          navMargin={0}
+          navSize={100}
+          navStyle={1}
         />
       </PictureContainer>
 
